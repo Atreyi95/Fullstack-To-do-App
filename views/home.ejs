@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="https://use.fontawesome.com/28644979d1.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id = "main_section">
+        <form action="/create-todo" method="POST">
+        <h1>Todo App</h1>
+        <div class="task">
+            <div>
+            <div class="task_head_cont">
+                   <h5>DESCRIPTION</h5>
+            </div>
+         
+            <div class="task_input_cont">
+                <input type="text" name="task_name" class="input_style" placeholder="What do you want to do?" required  autocomplete="off">
+            </div>  
+            </div>            
+        </div>
+
+        <div class="task">
+            <div class="flex_cont">
+            <div class="border-right">
+                <div class="task_head_cont">
+                       <h5>CATEGORY</h5>
+                </div>
+             
+                <div class="task_input_cont">
+                    <select name="category" id="category" class="input_style" required  autocomplete="off">
+                        <option value="" disabled selected hidden>Please Choose...</option>
+                        <option value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="other">Other</option>
+                      </select>
+                </div>  
+            </div> 
+
+            <div class="padding-left">
+                <div class="task_head_cont">
+                       <h5>DUE DATE</h5>
+                </div>
+             
+                <div class="task_input_cont">
+                    <input type="text" id="datepicker" placeholder="Enter Date" class="input_style" name="date" required  autocomplete="off">
+                </div>  
+            </div> 
+            </div>
+        </div>
+
+        <div class="task_button_cont">
+            <div class="flex_cont">
+            <button type="submit" id="sub_btn" class="btn_style"><i class="fa fa-plus padding-right"></i>ADD TASK</button>
+
+            <!-- <div id="delete_btn" class="btn_style">
+                <p><i class="fa fa-trash padding-right"></i>DELETE TASK</p>
+            </div> -->
+            </div>
+        </div>
+        </form>
+
+    <div>
+        <% for(let i of todo_list) {%> 
+        <div id="display_sect">            
+            <div class="display_item">
+                <div>
+                    <!-- <input type="checkbox" name="item1" > -->
+                    <!-- <input class="check" type="checkbox" name="id" value="<%= i._id %>" /> -->
+                <!-- <label for="item1">
+                    <%= i.todoDesc %>
+                </label> -->
+                <p><i class="fa fa-check" aria-hidden="true"></i> <%= i.todoDesc %></p>
+                <p><i class="fa fa-calendar" aria-hidden="true"></i> <%= i.date.toDateString() %></p>
+                </div>
+                <div class="category_tag_cont">
+                <div class="category_tag <%= i.category %>">
+                    <p> <%= i.category %></p>
+                </div>
+                <div class=" category_tag delete_btn">
+                    <a href="/delete-todo/?id=<%= i._id %>"> <p><i class="fa fa-trash padding-right"></i>DELETE</p></a>                      
+                </div>  
+                </div> 
+                
+                    
+                                       
+            </div>           
+        </div>
+        <%}%>
+
+        
+    </div>
+    <script src="/js/script.js"></script>
+
+</body>
+</html>
